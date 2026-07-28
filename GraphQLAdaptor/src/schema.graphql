@@ -1,0 +1,38 @@
+# --- Product type (catalog fields) ---
+type Product {
+  ProductID: String!
+  ProductName: String
+  Category: String
+  MRP: Float
+  Discount: Float
+}
+
+# --- Return type for Grid paging ---
+type ReturnType {
+  result: [Product!]!
+  count: Int!
+}
+
+type Query {
+  getProducts(datamanager: DataManagerInput): ReturnType!
+}
+
+# --- Syncfusion DataManager payload ---
+input DataManagerInput {
+  params: String
+}
+
+# --- Product input (for mutations) ---
+input ProductInput {
+  ProductID: String!
+  ProductName: String
+  Category: String
+  MRP: Float
+  Discount: Float
+}
+
+type Mutation {
+  createProduct(value: ProductInput!): Product!
+  updateProduct(key: String!, keyColumn: String, value: ProductInput!): Product
+  deleteProduct(key: String!, keyColumn: String): Product!
+}
